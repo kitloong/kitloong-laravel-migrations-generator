@@ -2,6 +2,7 @@
 
 namespace KitLoong\MigrationsGenerator\Tests\Feature\SQLite;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use KitLoong\MigrationsGenerator\Tests\Feature\FeatureTestCase;
 
@@ -38,7 +39,10 @@ abstract class SQLiteTestCase extends FeatureTestCase
 
     protected function refreshDatabase(): void
     {
+        $prefix = DB::getTablePrefix();
+        DB::setTablePrefix('');
         Schema::dropAllViews();
         Schema::dropAllTables();
+        DB::setTablePrefix($prefix);
     }
 }
