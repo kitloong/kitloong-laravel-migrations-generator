@@ -176,7 +176,7 @@ abstract class FeatureTestCase extends TestCase
      */
     protected function getTableNames(): array
     {
-        return Schema::getTableListing();
+        return Schema::getTableListing(schemaQualified: false);
     }
 
     /**
