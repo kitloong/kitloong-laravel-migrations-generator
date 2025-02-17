@@ -32,12 +32,12 @@ class SQLSrvIndex extends DatabaseIndex
             return;
         }
 
-        $blueprint = new Blueprint($this->stripTablePrefix($table));
+        $blueprint = new Blueprint(Schema::getConnection(), $this->stripTablePrefix($table));
 
         // Generate the alter index statement.
         $blueprint->{$this->type->value}($this->columns, $this->name);
 
-        $this->udtColumnSqls = $blueprint->toSql(Schema::getConnection(), Schema::getConnection()->getSchemaGrammar());
+        $this->udtColumnSqls = $blueprint->toSql();
     }
 
     /**
