@@ -21,8 +21,8 @@ class MigrationWriter
      *
      * @param  string  $path  Migration file destination path.
      * @param  string  $stubPath  Migration stub file path.
-     * @param  \Illuminate\Support\Collection<int, \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $up  Blueprint of migration `up`.
-     * @param  \Illuminate\Support\Collection<int, \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $down  Blueprint of migration `down`.
+     * @param  \Illuminate\Support\Collection<int, covariant \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $up  Blueprint of migration `up`.
+     * @param  \Illuminate\Support\Collection<int, covariant \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $down  Blueprint of migration `down`.
      */
     public function writeTo(
         string $path,
@@ -95,7 +95,7 @@ class MigrationWriter
     /**
      * Convert collection of blueprints to string and prettify and tabular.
      *
-     * @param  \Illuminate\Support\Collection<int, \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $blueprints
+     * @param  \Illuminate\Support\Collection<int, covariant \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $blueprints
      */
     private function prettifyToString(Collection $blueprints): string
     {

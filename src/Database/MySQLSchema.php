@@ -37,7 +37,7 @@ class MySQLSchema extends DatabaseSchema implements MySQLSchemaInterface
      */
     public function getViewNames(): Collection
     {
-        return $this->getViews()->map(static fn (View $view) => $view->getName());
+        return $this->getViews()->map(static fn(View $view) => $view->getName());
     }
 
     /**
@@ -45,8 +45,7 @@ class MySQLSchema extends DatabaseSchema implements MySQLSchemaInterface
      */
     public function getViews(): Collection
     {
-        return $this->getSchemaViews()
-            ->map(static fn (array $view) => new MySQLView($view));
+        return $this->getSchemaViews()->map(static fn (array $view) => new MySQLView($view));
     }
 
     /**
@@ -55,7 +54,7 @@ class MySQLSchema extends DatabaseSchema implements MySQLSchemaInterface
     public function getProcedures(): Collection
     {
         return $this->mySQLRepository->getProcedures()
-            ->map(static fn (ProcedureDefinition $procedureDefinition) => new MySQLProcedure($procedureDefinition->getName(), $procedureDefinition->getDefinition()));
+            ->map(static fn(ProcedureDefinition $procedureDefinition) => new MySQLProcedure($procedureDefinition->getName(), $procedureDefinition->getDefinition()));
     }
 
     /**
@@ -64,6 +63,6 @@ class MySQLSchema extends DatabaseSchema implements MySQLSchemaInterface
     public function getForeignKeys(string $table): Collection
     {
         return $this->getSchemaForeignKeys($table)
-            ->map(static fn (array $foreignKey) => new MySQLForeignKey($table, $foreignKey));
+            ->map(static fn(array $foreignKey) => new MySQLForeignKey($table, $foreignKey));
     }
 }

@@ -20,8 +20,8 @@ class SquashWriter
      * Append new content into `up`.
      * Prepend new content into `down`.
      *
-     * @param  \Illuminate\Support\Collection<int, \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $upBlueprints
-     * @param  \Illuminate\Support\Collection<int, \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $downBlueprints
+     * @param  \Illuminate\Support\Collection<int, covariant \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $upBlueprints
+     * @param  \Illuminate\Support\Collection<int, covariant \KitLoong\MigrationsGenerator\Migration\Blueprint\WritableBlueprint>  $downBlueprints
      */
     public function writeToTemp(Collection $upBlueprints, Collection $downBlueprints): void
     {
