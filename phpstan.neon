@@ -15,7 +15,6 @@ parameters:
 
     ignoreErrors:
         - '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::(.*)#'
-        - '#Cannot call method expectsQuestion\(\) on Illuminate\\Testing\\PendingCommand\|int\.#'
 
     excludePaths:
         - ./tests/resources/**
