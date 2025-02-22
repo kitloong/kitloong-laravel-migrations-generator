@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "kitloong/laravel-migrations-generator",
     "description": "Generates Laravel Migrations from an existing database",
     "keywords": [
