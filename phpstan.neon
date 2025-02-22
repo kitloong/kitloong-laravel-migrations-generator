@@ -1,5 +1,6 @@
 includes:
     - ./vendor/larastan/larastan/extension.neon
+    - ./vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
 
@@ -12,9 +13,6 @@ parameters:
 
     # `env` calls from `tests` directory are allowed
     noEnvCallsOutsideOfConfig: false
-
-    ignoreErrors:
-        - '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::(.*)#'
 
     excludePaths:
         - ./tests/resources/**
