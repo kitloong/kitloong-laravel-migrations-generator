@@ -4,14 +4,11 @@ namespace KitLoong\MigrationsGenerator\Tests\Feature\MariaDB;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use KitLoong\MigrationsGenerator\Support\CheckLaravelVersion;
 use KitLoong\MigrationsGenerator\Tests\Feature\FeatureTestCase;
 use PDO;
 
 abstract class MariaDBTestCase extends FeatureTestCase
 {
-    use CheckLaravelVersion;
-
     /**
      * @inheritDoc
      */
@@ -21,7 +18,7 @@ abstract class MariaDBTestCase extends FeatureTestCase
 
         $app['config']->set('database.default', 'mariadb');
         $app['config']->set('database.connections.mariadb', [
-            'driver'         => $this->atLeastLaravel11() ? 'mariadb' : 'mysql',
+            'driver'         => 'mariadb',
             'url'            => null,
             'host'           => env('MARIADB_HOST'),
             'port'           => env('MARIADB_PORT'),

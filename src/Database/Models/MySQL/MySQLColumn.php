@@ -254,10 +254,6 @@ class MySQLColumn extends DatabaseColumn
      */
     private function setRealSpatialColumn(): void
     {
-        if (!$this->atLeastLaravel11()) {
-            return;
-        }
-
         switch ($this->type) {
             case ColumnType::GEOMETRY_COLLECTION:
                 $this->spatialSubType = 'geometryCollection';

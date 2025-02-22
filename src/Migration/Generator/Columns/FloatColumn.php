@@ -6,17 +6,10 @@ use KitLoong\MigrationsGenerator\Enum\Migrations\Method\ColumnModifier;
 use KitLoong\MigrationsGenerator\Migration\Blueprint\Method;
 use KitLoong\MigrationsGenerator\Schema\Models\Column;
 use KitLoong\MigrationsGenerator\Schema\Models\Table;
-use KitLoong\MigrationsGenerator\Support\CheckLaravelVersion;
 
 class FloatColumn implements ColumnTypeGenerator
 {
-    use CheckLaravelVersion;
-
-    // Laravel version before 11 set (8, 2) as default precision.
-    private const DEFAULT_PRECISION = 8;
-    private const DEFAULT_SCALE     = 2;
-
-    private const DEFAULT_PRECISION_V11 = 53;
+    private const DEFAULT_PRECISION = 53;
 
     /**
      * @inheritDoc
@@ -35,32 +28,17 @@ class FloatColumn implements ColumnTypeGenerator
     }
 
     /**
-     * Get precision and scale.
-     * Return empty if precision = 8 and scale = 2.
+     * Get precision.
+     * Return empty if precision = {@see self::DEFAULT_PRECISION}.
      *
-     * @return array<int, int|null> "[]|[precision]|[precision, scale]"
+     * @return array<never, never>|array<int, int|null> "[]|[precision]"
      */
     private function getPrecisions(Column $column): array
     {
-        if ($this->atLeastLaravel11()) {
-            if ($column->getPrecision() === null || $column->getPrecision() === self::DEFAULT_PRECISION_V11) {
-                return [];
-            }
-
-            return [$column->getPrecision()];
-        }
-
-        if (
-            $column->getPrecision() === self::DEFAULT_PRECISION
-            && $column->getScale() === self::DEFAULT_SCALE
-        ) {
+        if ($column->getPrecision() === null || $column->getPrecision() === self::DEFAULT_PRECISION) {
             return [];
         }
 
-        if ($column->getScale() === self::DEFAULT_SCALE) {
-            return [$column->getPrecision()];
-        }
-
-        return [$column->getPrecision(), $column->getScale()];
+        return [$column->getPrecision()];
     }
 }
