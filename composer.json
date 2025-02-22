@@ -22,14 +22,14 @@
         "ext-pdo": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "^10.0",
-        "squizlabs/php_codesniffer": "^3.5",
-        "mockery/mockery": "^1.0",
+        "barryvdh/laravel-ide-helper": "^3.0",
         "friendsofphp/php-cs-fixer": "^3.1",
-        "larastan/larastan": "^3.0",
-        "slevomat/coding-standard": "^8.0",
+        "larastan/larastan": "^3.1",
+        "mockery/mockery": "^1.0",
+        "orchestra/testbench": "^10.0",
         "phpmd/phpmd": "^2.10",
-        "barryvdh/laravel-ide-helper": "^3.0"
+        "slevomat/coding-standard": "^8.0",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
         "psr-4": {
