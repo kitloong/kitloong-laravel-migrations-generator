@@ -10,6 +10,9 @@ parameters:
     # The level 9 is the highest level
     level: 8
 
+    # `env` calls from `tests` directory are allowed
+    noEnvCallsOutsideOfConfig: false
+
     ignoreErrors:
         - '#Method KitLoong\\MigrationsGenerator\\Database\\(.*)Schema::getViews\(\) should return Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Schema\\Models\\View> but returns Illuminate\\Support\\Collection<(int|\(int\|string\)), KitLoong\\MigrationsGenerator\\Database\\Models\\(.*)\\(.*)View>.#'
         - '#Method KitLoong\\MigrationsGenerator\\Database\\(.*)Schema::getProcedures\(\) should return Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Schema\\Models\\Procedure> but returns Illuminate\\Support\\Collection<(int|\(int\|string\)), KitLoong\\MigrationsGenerator\\Database\\Models\\(.*)\\(.*)Procedure>.#'
@@ -20,5 +23,3 @@ parameters:
 
     excludePaths:
         - ./tests/resources/**
-
-    checkMissingIterableValueType: true
