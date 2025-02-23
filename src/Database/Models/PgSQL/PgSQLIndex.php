@@ -2,8 +2,7 @@
 
 namespace KitLoong\MigrationsGenerator\Database\Models\PgSQL;
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use KitLoong\MigrationsGenerator\Database\Models\Blueprint;
 use KitLoong\MigrationsGenerator\Database\Models\DatabaseIndex;
 use KitLoong\MigrationsGenerator\Enum\Migrations\Method\IndexType;
 use KitLoong\MigrationsGenerator\Support\TableName;
@@ -32,11 +31,11 @@ class PgSQLIndex extends DatabaseIndex
             return;
         }
 
-        $blueprint = new Blueprint(Schema::getConnection(), $this->stripTablePrefix($table));
+        $blueprint = new Blueprint($this->stripTablePrefix($table));
 
         // Generate the alter index statement.
         $blueprint->{$this->type->value}($this->columns, $this->name);
 
-        $this->udtColumnSqls = $blueprint->toSql();
+        $this->udtColumnSqls = $blueprint->toSqlWithCompatible();
     }
 }
