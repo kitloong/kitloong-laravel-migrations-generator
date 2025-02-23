@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\App;
 
 trait CheckLaravelVersion
 {
-    public function atLeastLaravel11(): bool
+    public function atLeastLaravel12(): bool
     {
-        return $this->atLeastLaravelVersion('11.0');
+        return $this->atLeastLaravelVersion('12.0') || version_compare(App::version(), '12.x-dev', '==');
     }
 
     private function atLeastLaravelVersion(string $version): bool

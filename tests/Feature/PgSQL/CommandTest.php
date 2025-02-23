@@ -4,12 +4,9 @@ namespace KitLoong\MigrationsGenerator\Tests\Feature\PgSQL;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
-use KitLoong\MigrationsGenerator\Support\CheckLaravelVersion;
 
 class CommandTest extends PgSQLTestCase
 {
-    use CheckLaravelVersion;
-
     public function testRun(): void
     {
         $migrateTemplates = function (): void {

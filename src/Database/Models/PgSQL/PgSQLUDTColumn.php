@@ -2,9 +2,8 @@
 
 namespace KitLoong\MigrationsGenerator\Database\Models\PgSQL;
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use KitLoong\MigrationsGenerator\Database\Models\Blueprint;
 use KitLoong\MigrationsGenerator\Database\Models\DatabaseUDTColumn;
 use KitLoong\MigrationsGenerator\Enum\Migrations\Method\ColumnType;
 use KitLoong\MigrationsGenerator\Support\TableName;
@@ -33,7 +32,7 @@ class PgSQLUDTColumn extends DatabaseUDTColumn
             'nullable'      => $column['nullable'],
         ]);
 
-        $sqls = $blueprint->toSql(Schema::getConnection(), Schema::getConnection()->getSchemaGrammar());
+        $sqls = $blueprint->toSqlWithCompatible();
 
         // Replace the string column type with the user-defined type.
         $sqls[0] = Str::replaceFirst(' varchar ', ' ' . $column['type'] . ' ', $sqls[0]);

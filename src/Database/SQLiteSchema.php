@@ -37,8 +37,7 @@ class SQLiteSchema extends DatabaseSchema
      */
     public function getViews(): Collection
     {
-        return $this->getSchemaViews()
-            ->map(static fn (array $view) => new SQLiteView($view));
+        return $this->getSchemaViews()->map(static fn (array $view) => new SQLiteView($view));
     }
 
     /**

@@ -45,8 +45,7 @@ class MySQLSchema extends DatabaseSchema implements MySQLSchemaInterface
      */
     public function getViews(): Collection
     {
-        return $this->getSchemaViews()
-            ->map(static fn (array $view) => new MySQLView($view));
+        return $this->getSchemaViews()->map(static fn (array $view) => new MySQLView($view));
     }
 
     /**

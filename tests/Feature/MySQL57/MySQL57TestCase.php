@@ -64,8 +64,11 @@ abstract class MySQL57TestCase extends FeatureTestCase
 
     protected function refreshDatabase(): void
     {
+        $prefix = DB::getTablePrefix();
+        DB::setTablePrefix('');
         Schema::dropAllViews();
         Schema::dropAllTables();
+        DB::setTablePrefix($prefix);
         $this->dropAllProcedures();
     }
 

@@ -27,9 +27,8 @@ use KitLoong\MigrationsGenerator\Schema\SQLSrvSchema;
 class MigrateGenerateCommand extends Command
 {
     /**
-     * The name and signature of the console command.
+     * @inheritDoc
      */
-    // phpcs:ignore
     protected $signature = 'migrate:generate
                             {tables? : A list of tables or views you wish to generate migrations for separated by a comma: users,posts,comments}
                             {--c|connection= : The database connection to use}
@@ -54,9 +53,8 @@ class MigrateGenerateCommand extends Command
                             {--with-has-table : Check for the existence of a table using `hasTable`}';
 
     /**
-     * The console command description.
+     * @inheritDoc
      */
-    // phpcs:ignore
     protected $description = 'Generate migrations from an existing table structure.';
 
     protected Schema $schema;

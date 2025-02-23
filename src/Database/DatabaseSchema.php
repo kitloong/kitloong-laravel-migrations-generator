@@ -66,7 +66,7 @@ abstract class DatabaseSchema implements Schema
      */
     public function getTableNames(): Collection
     {
-        return new Collection(SchemaFacade::getTableListing());
+        return new Collection(array_column(SchemaFacade::getTables(), 'name'));
     }
 
     /**

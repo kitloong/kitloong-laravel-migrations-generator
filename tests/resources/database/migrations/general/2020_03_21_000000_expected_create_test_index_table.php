@@ -4,13 +4,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use KitLoong\MigrationsGenerator\Enum\Driver;
-use KitLoong\MigrationsGenerator\Support\CheckMigrationMethod;
 use KitLoong\MigrationsGenerator\Tests\TestMigration;
 
 return new class extends TestMigration
 {
-    use CheckMigrationMethod;
-
     /**
      * Run the migrations.
      *
@@ -39,16 +36,9 @@ return new class extends TestMigration
 
             // SQLite does not support spatial index.
             if (DB::getDriverName() !== Driver::SQLITE->value) {
-                if ($this->hasGeography()) {
-                    $table->geography('spatial_index', null, 0)->spatialIndex();
-                    $table->geography('spatial_index_custom', null, 0);
-                    $table->spatialIndex('spatial_index_custom', 'spatial_index_custom');
-                }
-                if (!$this->hasGeography()) {
-                    $table->geometry('spatial_index')->spatialIndex();
-                    $table->geometry('spatial_index_custom');
-                    $table->spatialIndex('spatial_index_custom', 'spatial_index_custom');
-                }
+                $table->geography('spatial_index', null, 0)->spatialIndex();
+                $table->geography('spatial_index_custom', null, 0);
+                $table->spatialIndex('spatial_index_custom', 'spatial_index_custom');
             }
 
             if (in_array(DB::getDriverName(), [Driver::MARIADB->value, Driver::MYSQL->value, Driver::PGSQL->value])) {
