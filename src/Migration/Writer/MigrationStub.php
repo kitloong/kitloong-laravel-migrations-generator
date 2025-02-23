@@ -10,7 +10,6 @@ class MigrationStub
      * Get the migration stub file.
      *
      * @return string File content.
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function getStub(string $stubPath): string
     {

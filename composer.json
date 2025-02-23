@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "kitloong/laravel-migrations-generator",
     "description": "Generates Laravel Migrations from an existing database",
     "keywords": [
@@ -17,19 +18,20 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "illuminate/support": "^10.43|^11.0",
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0",
         "ext-pdo": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0|^9.0",
-        "squizlabs/php_codesniffer": "^3.5",
-        "mockery/mockery": "^1.0",
+        "barryvdh/laravel-ide-helper": "^3.0",
         "friendsofphp/php-cs-fixer": "^3.1",
-        "larastan/larastan": "^1.0|^2.0",
-        "slevomat/coding-standard": "^8.0",
+        "larastan/larastan": "^2.0|^3.0",
+        "mockery/mockery": "^1.0",
+        "orchestra/testbench": "^9.0|^10.0",
         "phpmd/phpmd": "^2.10",
-        "barryvdh/laravel-ide-helper": "^2.0|^3.0"
+        "phpstan/phpstan-mockery": "^2.0",
+        "slevomat/coding-standard": "^8.0",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
         "psr-4": {
@@ -65,6 +67,7 @@
         ]
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         }

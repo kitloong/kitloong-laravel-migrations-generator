@@ -4,13 +4,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use KitLoong\MigrationsGenerator\Enum\Driver;
-use KitLoong\MigrationsGenerator\Support\CheckLaravelVersion;
 use KitLoong\MigrationsGenerator\Tests\TestMigration;
 
 return new class extends TestMigration
 {
-    use CheckLaravelVersion;
-
     /**
      * Run the migrations.
      *
@@ -73,46 +70,34 @@ return new class extends TestMigration
             $table->mediumText('mediumText');
             $table->geometry('geometry');
 
-            // https://github.com/laravel/framework/pull/49634
-            if ($this->atLeastLaravel11()) {
-                if (
-                    !in_array(DB::getDriverName(), [Driver::MARIADB->value, Driver::MYSQL->value]) ||
-                    version_compare(DB::getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION), '5.8', '>')
-                ) {
-                    $table->geography('geography');
-                    $table->geography('geographyGeometryCollection', 'geometryCollection');
-                    $table->geography('geographyLineString', 'lineString');
-                    $table->geography('geographyMultiLineString', 'multiLineString');
-                    $table->geography('geographyMultiPoint', 'multiPoint');
-                    $table->geography('geographyMultiPolygon', 'multiPolygon');
-                    $table->geography('geographyPoint', 'point');
-                    $table->geography('geographyPolygon', 'polygon');
-                    $table->geography('geography1', null, 3857);
+            $table->geometry('geometryCollection', 'geometryCollection');
+            $table->geometry('lineString', 'lineString');
+            $table->geometry('multiLineString', 'multiLineString');
+            $table->geometry('multiPoint', 'multiPoint');
+            $table->geometry('multiPolygon', 'multiPolygon');
+            $table->geometry('point', 'point');
+            $table->geometry('polygon', 'polygon');
 
-                    if (DB::getDriverName() !== Driver::PGSQL->value) {
-                        $table->geography('geography2', 'geometryCollection', 3857);
-                    }
+            if (
+                !in_array(DB::getDriverName(), [Driver::MARIADB->value, Driver::MYSQL->value]) ||
+                version_compare(DB::getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION), '5.7', 'eq')
+            ) {
+                $table->geography('geography');
+                $table->geography('geographyGeometryCollection', 'geometryCollection');
+                $table->geography('geographyLineString', 'lineString');
+                $table->geography('geographyMultiLineString', 'multiLineString');
+                $table->geography('geographyMultiPoint', 'multiPoint');
+                $table->geography('geographyMultiPolygon', 'multiPolygon');
+                $table->geography('geographyPoint', 'point');
+                $table->geography('geographyPolygon', 'polygon');
+                $table->geography('geography1', null, 3857);
 
-                    $table->geometry('geometryCollection', 'geometryCollection');
-                    $table->geometry('lineString', 'lineString');
-                    $table->geometry('multiLineString', 'multiLineString');
-                    $table->geometry('multiPoint', 'multiPoint');
-                    $table->geometry('multiPolygon', 'multiPolygon');
-                    $table->geometry('point', 'point');
-                    $table->geometry('polygon', 'polygon');
-                    $table->geometry('geometry1', null, 3857);
-                    $table->geometry('geometry2', 'geometryCollection', 3857);
+                if (DB::getDriverName() !== Driver::PGSQL->value) {
+                    $table->geography('geography2', 'geometryCollection', 3857);
                 }
-            }
 
-            if (!$this->atLeastLaravel11() && DB::getDriverName() !== Driver::SQLITE->value) {
-                $table->geometryCollection('geometryCollection'); // @phpstan-ignore-line
-                $table->lineString('lineString');  // @phpstan-ignore-line
-                $table->multiLineString('multiLineString');  // @phpstan-ignore-line
-                $table->multiPoint('multiPoint');  // @phpstan-ignore-line
-                $table->multiPolygon('multiPolygon');  // @phpstan-ignore-line
-                $table->point('point');  // @phpstan-ignore-line
-                $table->polygon('polygon');  // @phpstan-ignore-line
+                $table->geometry('geometry1', null, 3857);
+                $table->geometry('geometry2', 'geometryCollection', 3857);
             }
 
             $table->smallInteger('smallInteger');
@@ -152,19 +137,6 @@ return new class extends TestMigration
             $table->decimal('unsignedDecimal')->unsigned();
             $table->double('unsignedDouble')->unsigned();
             $table->float('unsignedFloat')->unsigned();
-
-            if (!$this->atLeastLaravel11()) {
-                // https://github.com/laravel/framework/pull/48861
-                $table->double('double_82', 8, 2); // @phpstan-ignore-line
-                $table->double('double_83', 8, 3); // @phpstan-ignore-line
-                $table->double('double_92', 9, 2); // @phpstan-ignore-line
-                $table->double('double_53', 5, 3); // @phpstan-ignore-line
-                $table->float('float_82', 8, 2); // @phpstan-ignore-line
-                $table->float('float_83', 8, 3); // @phpstan-ignore-line
-                $table->float('float_92', 9, 2); // @phpstan-ignore-line
-                $table->float('float_53', 5, 3); // @phpstan-ignore-line
-                $table->float('float_56', 50);
-            }
 
             $table->unsignedInteger('unsignedInteger');
             $table->unsignedMediumInteger('unsignedMediumInteger');

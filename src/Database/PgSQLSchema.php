@@ -66,8 +66,7 @@ class PgSQLSchema extends DatabaseSchema
      */
     public function getViewNames(): Collection
     {
-        return $this->getViews()
-            ->map(static fn (View $view) => $view->getName());
+        return $this->getViews()->map(static fn (View $view) => $view->getName());
     }
 
     /**

@@ -1,5 +1,6 @@
 includes:
     - ./vendor/larastan/larastan/extension.neon
+    - ./vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
 
@@ -10,15 +11,8 @@ parameters:
     # The level 9 is the highest level
     level: 8
 
-    ignoreErrors:
-        - '#Method KitLoong\\MigrationsGenerator\\Database\\(.*)Schema::getViews\(\) should return Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Schema\\Models\\View> but returns Illuminate\\Support\\Collection<(int|\(int\|string\)), KitLoong\\MigrationsGenerator\\Database\\Models\\(.*)\\(.*)View>.#'
-        - '#Method KitLoong\\MigrationsGenerator\\Database\\(.*)Schema::getProcedures\(\) should return Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Schema\\Models\\Procedure> but returns Illuminate\\Support\\Collection<(int|\(int\|string\)), KitLoong\\MigrationsGenerator\\Database\\Models\\(.*)\\(.*)Procedure>.#'
-        - '#Method KitLoong\\MigrationsGenerator\\Database\\(.*)Schema::getForeignKeys\(\) should return Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Schema\\Models\\ForeignKey> but returns Illuminate\\Support\\Collection<(int|\(int\|string\)), KitLoong\\MigrationsGenerator\\Database\\Models\\(.*)\\(.*)ForeignKey>.#'
-        - '#(.*)expects Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Migration\\Blueprint\\WritableBlueprint>, Illuminate\\Support\\Collection<int, KitLoong\\MigrationsGenerator\\Migration\\Blueprint\\(.*)Blueprint> given.#'
-        - '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::(.*)#'
-        - '#Cannot call method expectsQuestion\(\) on Illuminate\\Testing\\PendingCommand\|int\.#'
+    # `env` calls from `tests` directory are allowed
+    noEnvCallsOutsideOfConfig: false
 
     excludePaths:
         - ./tests/resources/**
-
-    checkMissingIterableValueType: true

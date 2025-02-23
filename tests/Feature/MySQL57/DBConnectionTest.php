@@ -49,13 +49,20 @@ class DBConnectionTest extends MySQL57TestCase
 
         DB::setDefaultConnection('mysql8');
 
-        $this->artisan(
-            'migrate:generate',
-            [
-                '--connection' => 'mysql57',
-                '--path'       => $this->getStorageMigrationsPath(),
-            ],
-        )
+        $generateMigration = function () {
+            /** @var \Illuminate\Testing\PendingCommand $command */
+            $command = $this->artisan(
+                'migrate:generate',
+                [
+                    '--connection' => 'mysql57',
+                    '--path'       => $this->getStorageMigrationsPath(),
+                ],
+            );
+
+            return $command;
+        };
+
+        $generateMigration()
             ->expectsQuestion('Do you want to log these migrations in the migrations table?', true)
             ->expectsQuestion(
                 'Log into current connection: mysql57? [Y = mysql57, n = mysql8 (default connection)]',

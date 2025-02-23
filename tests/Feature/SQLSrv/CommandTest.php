@@ -93,8 +93,6 @@ class CommandTest extends SQLSrvTestCase
         $this->truncateMigrationsTable();
 
         $this->generateMigrations();
-
-        $this->assertTrue(true);
     }
 
     public function testSkipVendor(): void

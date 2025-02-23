@@ -21,22 +21,6 @@ Laravel Migrations Generator supports all five Laravel first-party support datab
 - [x] SQL Server
 - [x] SQLite
 
-## Version Compatibility
-
-| Laravel            | Version                                         |
-|--------------------|-------------------------------------------------|
-| 11.x               | 7.x                                             |
-| \>= 10.43.x        | 7.x                                             |
-| 10.x \| <= 10.42.x | 6.x                                             |
-| 9.x                | 6.x                                             |
-| 8.x                | 6.x                                             |
-| 7.x                | 6.x                                             |
-| 6.x                | 6.x                                             |
-| 5.8.x              | 6.x                                             |
-| 5.7.x              | 6.x                                             |
-| 5.6.x              | 6.x                                             |
-| <= 5.5.x           | https://github.com/Xethron/migrations-generator |
-
 ## Install
 
 The recommended way to install this is through composer:
