@@ -19,15 +19,15 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^12.0",
+        "illuminate/support": "^11.0|^12.0",
         "ext-pdo": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",
         "friendsofphp/php-cs-fixer": "^3.1",
-        "larastan/larastan": "^3.1",
+        "larastan/larastan": "^2.0|^3.0",
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "^10.0",
+        "orchestra/testbench": "^9.0|^10.0",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan-mockery": "^2.0",
         "slevomat/coding-standard": "^8.0",
