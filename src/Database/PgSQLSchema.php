@@ -4,7 +4,6 @@ namespace KitLoong\MigrationsGenerator\Database;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use KitLoong\MigrationsGenerator\Database\Models\PgSQL\PgSQLForeignKey;
 use KitLoong\MigrationsGenerator\Database\Models\PgSQL\PgSQLProcedure;
 use KitLoong\MigrationsGenerator\Database\Models\PgSQL\PgSQLTable;
@@ -13,9 +12,12 @@ use KitLoong\MigrationsGenerator\Repositories\Entities\ProcedureDefinition;
 use KitLoong\MigrationsGenerator\Repositories\PgSQLRepository;
 use KitLoong\MigrationsGenerator\Schema\Models\Table;
 use KitLoong\MigrationsGenerator\Schema\Models\View;
+use KitLoong\MigrationsGenerator\Support\CheckLaravelVersion;
 
 class PgSQLSchema extends DatabaseSchema
 {
+    use CheckLaravelVersion;
+
     /**
      * @var \Illuminate\Support\Collection<int, string>
      */
@@ -33,7 +35,7 @@ class PgSQLSchema extends DatabaseSchema
      */
     public function getTableNames(): Collection
     {
-        return (new Collection(Schema::getTables()))
+        return (new Collection($this->getSchemaTables()))
             ->filter(static function (array $table): bool {
                 if ($table['name'] === 'spatial_ref_sys') {
                     return false;
@@ -116,7 +118,7 @@ class PgSQLSchema extends DatabaseSchema
     private function getUserDefinedTypes(): Collection
     {
         if (!$this->ranGetUserDefinedTypes) {
-            $this->userDefinedTypes       = new Collection(array_column(Schema::getTypes(), 'name'));
+            $this->userDefinedTypes       = new Collection(array_column($this->getSchemaTypes(), 'name'));
             $this->ranGetUserDefinedTypes = true;
         }
 

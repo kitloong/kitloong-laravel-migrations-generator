@@ -27,6 +27,7 @@ class PgSQLColumnTest extends TestCase
             'default'        => null,
             'auto_increment' => false,
             'comment'        => null,
+            'generation'     => null,
         ]);
 
         $this->assertSame(ColumnType::GEOGRAPHY, $column->getType());
