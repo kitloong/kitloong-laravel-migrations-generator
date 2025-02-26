@@ -5,12 +5,14 @@ namespace KitLoong\MigrationsGenerator\Database;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema as SchemaFacade;
 use KitLoong\MigrationsGenerator\Schema\Schema;
+use KitLoong\MigrationsGenerator\Support\CheckLaravelVersion;
 use KitLoong\MigrationsGenerator\Support\TableName;
 
 /**
  * @phpstan-type SchemaTable array{
  *     name: string,
  *     schema: ?string,
+ *     schema_qualified_name: string,
  *     size: ?int,
  *     comment: ?string,
  *     collation: ?string,
@@ -20,6 +22,7 @@ use KitLoong\MigrationsGenerator\Support\TableName;
  * @phpstan-type SchemaView array{
  *     name: string,
  *     schema: ?string,
+ *     schema_qualified_name: string,
  *     definition: string,
  * }
  *
@@ -32,12 +35,13 @@ use KitLoong\MigrationsGenerator\Support\TableName;
  *     default: ?string,
  *     auto_increment: bool,
  *     comment: ?string,
+ *     generation: ?array{type: 'stored'|'virtual', expression: string},
  * }
  *
  * @phpstan-type SchemaIndex array{
  *     name: string,
  *     columns: string[],
- *     type: string,
+ *     type: ?string,
  *     unique: bool,
  *     primary: bool,
  * }
@@ -51,9 +55,20 @@ use KitLoong\MigrationsGenerator\Support\TableName;
  *     on_update: string,
  *     on_delete: string,
  * }
+ *
+ * @phpstan-type SchemaType array{
+ *     name: string,
+ *     schema: string,
+ *     schema_qualified_name: string,
+ *     implicit: bool,
+ *     type: string,
+ *     category: string,
+ * }
  */
 abstract class DatabaseSchema implements Schema
 {
+    use CheckLaravelVersion;
+
     use TableName;
 
     /**
@@ -66,7 +81,7 @@ abstract class DatabaseSchema implements Schema
      */
     public function getTableNames(): Collection
     {
-        return new Collection(array_column(SchemaFacade::getTables(), 'name'));
+        return new Collection(array_column($this->getSchemaTables(), 'name'));
     }
 
     /**
@@ -77,7 +92,7 @@ abstract class DatabaseSchema implements Schema
     protected function getSchemaTable(string $name): array
     {
         if ($this->tables === []) {
-            foreach (SchemaFacade::getTables() as $table) {
+            foreach ($this->getSchemaTables() as $table) {
                 /** @var SchemaTable $table */
                 $this->tables[$table['name']] = $table;
             }
@@ -93,6 +108,10 @@ abstract class DatabaseSchema implements Schema
      */
     protected function getSchemaColumns(string $table): Collection
     {
+        if ($this->atLeastLaravel12()) {
+            return new Collection(SchemaFacade::getColumns(SchemaFacade::getCurrentSchemaName() . '.' . $this->stripTablePrefix($table)));
+        }
+
         return new Collection(SchemaFacade::getColumns($this->stripTablePrefix($table)));
     }
 
@@ -103,6 +122,10 @@ abstract class DatabaseSchema implements Schema
      */
     protected function getSchemaIndexes(string $table): Collection
     {
+        if ($this->atLeastLaravel12()) {
+            return new Collection(SchemaFacade::getIndexes(SchemaFacade::getCurrentSchemaName() . '.' . $this->stripTablePrefix($table)));
+        }
+
         return new Collection(SchemaFacade::getIndexes($this->stripTablePrefix($table)));
     }
 
@@ -113,6 +136,10 @@ abstract class DatabaseSchema implements Schema
      */
     protected function getSchemaViews(): Collection
     {
+        if ($this->atLeastLaravel12()) {
+            return new Collection(SchemaFacade::getViews(SchemaFacade::getCurrentSchemaName()));
+        }
+
         return new Collection(SchemaFacade::getViews());
     }
 
@@ -123,6 +150,38 @@ abstract class DatabaseSchema implements Schema
      */
     protected function getSchemaForeignKeys(string $table): Collection
     {
+        if ($this->atLeastLaravel12()) {
+            return new Collection(SchemaFacade::getForeignKeys(SchemaFacade::getCurrentSchemaName() . '.' . $this->stripTablePrefix($table)));
+        }
+
         return new Collection(SchemaFacade::getForeignKeys($this->stripTablePrefix($table)));
+    }
+
+    /**
+     * Get all tables from the schema.
+     *
+     * @return SchemaTable[]
+     */
+    protected function getSchemaTables(): array
+    {
+        if ($this->atLeastLaravel12()) {
+            return SchemaFacade::getTables(SchemaFacade::getCurrentSchemaName());
+        }
+
+        return SchemaFacade::getTables();
+    }
+
+    /**
+     * Get user defined types from the schema.
+     *
+     * @return SchemaType[]
+     */
+    protected function getSchemaTypes(): array
+    {
+        if ($this->atLeastLaravel12()) {
+            return SchemaFacade::getTypes(SchemaFacade::getCurrentSchemaName());
+        }
+
+        return SchemaFacade::getTypes();
     }
 }
