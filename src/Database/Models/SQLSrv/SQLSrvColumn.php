@@ -153,7 +153,7 @@ class SQLSrvColumn extends DatabaseColumn
         return $this->repository->getEnumPresetValues(
             $this->tableName,
             $this->name,
-        )->toArray();
+        )->all();
     }
 
     /**
