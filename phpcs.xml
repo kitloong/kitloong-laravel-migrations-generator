@@ -178,9 +178,11 @@
   <rule ref="SlevomatCodingStandard.PHP.UselessParentheses"/>
   <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
   <rule ref="SlevomatCodingStandard.Strings.DisallowVariableParsing"/>
+  <rule ref="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint"/>
   <!--<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>-->
   <!--<rule ref="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>-->
   <!--<rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>-->
+  <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat"/>
   <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
@@ -189,7 +191,6 @@
   <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
   <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint"/>
   <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
-  <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat"/>
   <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
   <rule ref="SlevomatCodingStandard.Variables.DisallowVariableVariable"/>
   <!--<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>-->

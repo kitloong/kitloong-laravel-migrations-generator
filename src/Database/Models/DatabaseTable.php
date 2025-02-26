@@ -71,7 +71,7 @@ abstract class DatabaseTable implements Table
         $this->comment   = $table['comment'];
         $this->collation = $table['collation'];
 
-        $this->columns = $columns->reduce(function ($columns, array $column) use ($userDefinedTypes) {
+        $this->columns = $columns->reduce(function (Collection $columns, array $column) use ($userDefinedTypes) {
             if (!$userDefinedTypes->contains($column['type_name'])) {
                 $columns->push($this->makeColumn($this->name, $column));
             }
@@ -79,7 +79,7 @@ abstract class DatabaseTable implements Table
             return $columns;
         }, new Collection())->values();
 
-        $this->udtColumns = $columns->reduce(function ($columns, array $column) use ($userDefinedTypes) {
+        $this->udtColumns = $columns->reduce(function (Collection $columns, array $column) use ($userDefinedTypes) {
             if ($userDefinedTypes->contains($column['type_name'])) {
                 $columns->push($this->makeUDTColumn($this->name, $column));
             }
