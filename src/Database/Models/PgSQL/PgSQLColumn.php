@@ -57,8 +57,6 @@ class PgSQLColumn extends DatabaseColumn
 
             default:
         }
-
-        $this->setStoredDefinition();
     }
 
     /**
@@ -180,20 +178,5 @@ class PgSQLColumn extends DatabaseColumn
         }
 
         return $presetValues;
-    }
-
-    /**
-     * Set stored definition if the column is stored.
-     */
-    private function setStoredDefinition(): void
-    {
-        $this->storedDefinition = $this->repository->getStoredDefinition($this->tableName, $this->name);
-
-        // A generated column cannot have a column default or an identity definition.
-        if ($this->storedDefinition === null) {
-            return;
-        }
-
-        $this->default = null;
     }
 }
