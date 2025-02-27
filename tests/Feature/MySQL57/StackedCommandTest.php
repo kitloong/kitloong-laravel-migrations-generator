@@ -60,9 +60,9 @@ class StackedCommandTest extends MySQL57TestCase
     /**
      * @inheritDoc
      */
-    protected function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('database.connections.migration2', [
             'driver'         => 'mysql',

@@ -20,9 +20,9 @@ class TablePrefixTest extends MariaDBTestCase
     /**
      * @inheritDoc
      */
-    protected function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('database.connections.mariadb.prefix', 'prefix_');
     }
