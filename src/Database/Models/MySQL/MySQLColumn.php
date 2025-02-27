@@ -222,15 +222,13 @@ class MySQLColumn extends DatabaseColumn
      */
     private function setVirtualDefinition(): void
     {
-        $virtualDefinition = $this->mysqlRepository->getVirtualDefinition($this->tableName, $this->name);
-
-        if ($virtualDefinition === null) {
+        if ($this->virtualDefinition === null) {
             return;
         }
 
         // The definition of MySQL8 returned `concat(string,_utf8mb4\' \',string_255)`.
         // Replace `\'` to `'` here to avoid double escape.
-        $this->virtualDefinition = str_replace("\'", "'", $virtualDefinition);
+        $this->virtualDefinition = str_replace("\'", "'", $this->virtualDefinition);
     }
 
     /**
@@ -238,15 +236,13 @@ class MySQLColumn extends DatabaseColumn
      */
     private function setStoredDefinition(): void
     {
-        $storedDefinition = $this->mysqlRepository->getStoredDefinition($this->tableName, $this->name);
-
-        if ($storedDefinition === null) {
+        if ($this->storedDefinition === null) {
             return;
         }
 
         // The definition of MySQL8 returned `concat(string,_utf8mb4\' \',string_255)`.
         // Replace `\'` to `'` here to avoid double escape.
-        $this->storedDefinition = str_replace("\'", "'", $storedDefinition);
+        $this->storedDefinition = str_replace("\'", "'", $this->storedDefinition);
     }
 
     /**

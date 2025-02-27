@@ -79,8 +79,8 @@ abstract class DatabaseColumn implements Column
         $this->presetValues              = [];
         $this->onUpdateCurrentTimestamp  = false;
         $this->rawDefault                = false;
-        $this->virtualDefinition         = null;
-        $this->storedDefinition          = null;
+        $this->virtualDefinition         = $column['generation'] !== null && $column['generation']['type'] === 'virtual' ? $column['generation']['expression'] : null;
+        $this->storedDefinition          = $column['generation'] !== null && $column['generation']['type'] === 'stored' ? $column['generation']['expression'] : null ;
         $this->spatialSubType            = null;
         $this->spatialSrID               = null;
 
