@@ -81,9 +81,9 @@ class DBConnectionTest extends MySQL57TestCase
     /**
      * @inheritDoc
      */
-    protected function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('database.default', 'mysql8');
         $app['config']->set('database.connections.mysql8', [

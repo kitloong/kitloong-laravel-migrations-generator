@@ -49,9 +49,9 @@ abstract class TestCase extends Testbench
     /**
      * @inheritDoc
      */
-    protected function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         app()->setBasePath(__DIR__ . '/../');
     }

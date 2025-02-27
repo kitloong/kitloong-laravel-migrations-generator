@@ -107,7 +107,7 @@ abstract class FeatureTestCase extends TestCase
      * Generate migration files to $this->storageMigrations()
      *
      * @param  array<string, string|bool|int>  $options
-     * @see \KitLoong\MigrationsGenerator\Tests\Feature\FeatureTestCase::getEnvironmentSetUp()
+     * @see \KitLoong\MigrationsGenerator\Tests\Feature\FeatureTestCase::defineEnvironment()
      */
     protected function generateMigrations(array $options = []): void
     {

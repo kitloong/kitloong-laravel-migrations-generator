@@ -11,9 +11,9 @@ abstract class SQLiteTestCase extends FeatureTestCase
     /**
      * @inheritDoc
      */
-    protected function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         touch((string) env('SQLITE_DATABASE'));
 

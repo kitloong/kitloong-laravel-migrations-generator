@@ -12,9 +12,9 @@ abstract class PgSQLTestCase extends FeatureTestCase
     /**
      * @inheritDoc
      */
-    protected function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('database.default', 'pgsql');
         $app['config']->set('database.connections.pgsql', [
