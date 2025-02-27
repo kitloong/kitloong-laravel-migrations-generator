@@ -87,14 +87,7 @@ class MySQLColumn extends DatabaseColumn
 
             case ColumnType::GEOGRAPHY:
             case ColumnType::GEOMETRY:
-            case ColumnType::GEOMETRY_COLLECTION:
-            case ColumnType::LINE_STRING:
-            case ColumnType::MULTI_LINE_STRING:
-            case ColumnType::POINT:
-            case ColumnType::MULTI_POINT:
-            case ColumnType::POLYGON:
-            case ColumnType::MULTI_POLYGON:
-                $this->setRealSpatialColumn();
+                $this->setRealSpatialColumn($column['type_name']);
                 break;
 
             default:
@@ -248,34 +241,35 @@ class MySQLColumn extends DatabaseColumn
     /**
      * Set to geometry or geography.
      */
-    private function setRealSpatialColumn(): void
+    private function setRealSpatialColumn(string $typeName): void
     {
-        switch ($this->type) {
-            case ColumnType::GEOMETRY_COLLECTION:
+        switch ($typeName) {
+            case 'geometrycollection':
+            case 'geomcollection':
                 $this->spatialSubType = 'geometryCollection';
                 break;
 
-            case ColumnType::LINE_STRING:
+            case 'linestring':
                 $this->spatialSubType = 'lineString';
                 break;
 
-            case ColumnType::MULTI_LINE_STRING:
+            case 'multilinestring':
                 $this->spatialSubType = 'multiLineString';
                 break;
 
-            case ColumnType::POINT:
+            case 'point':
                 $this->spatialSubType = 'point';
                 break;
 
-            case ColumnType::MULTI_POINT:
+            case 'multipoint':
                 $this->spatialSubType = 'multiPoint';
                 break;
 
-            case ColumnType::POLYGON:
+            case 'polygon':
                 $this->spatialSubType = 'polygon';
                 break;
 
-            case ColumnType::MULTI_POLYGON:
+            case 'multipolygon':
                 $this->spatialSubType = 'multiPolygon';
                 break;
 

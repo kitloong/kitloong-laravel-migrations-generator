@@ -47,20 +47,19 @@ class MySQLColumnType extends DatabaseColumnType
         'varchar'            => ColumnType::STRING,
         'year'               => ColumnType::YEAR,
 
+        'geomcollection'     => ColumnType::GEOMETRY,
+        'linestring'         => ColumnType::GEOMETRY,
+        'multilinestring'    => ColumnType::GEOMETRY,
+        'point'              => ColumnType::GEOMETRY,
+        'multipoint'         => ColumnType::GEOMETRY,
+        'polygon'            => ColumnType::GEOMETRY,
+        'multipolygon'       => ColumnType::GEOMETRY,
+
         // For MariaDB
         'uuid'               => ColumnType::UUID,
 
-        // Removed from Laravel v11
-        'geomcollection'     => ColumnType::GEOMETRY_COLLECTION,
-        'linestring'         => ColumnType::LINE_STRING,
-        'multilinestring'    => ColumnType::MULTI_LINE_STRING,
-        'point'              => ColumnType::POINT,
-        'multipoint'         => ColumnType::MULTI_POINT,
-        'polygon'            => ColumnType::POLYGON,
-        'multipolygon'       => ColumnType::MULTI_POLYGON,
-
-        // For MariaDB
-        'geometrycollection' => ColumnType::GEOMETRY_COLLECTION,
+        // For MariaDB and MySQL57
+        'geometrycollection' => ColumnType::GEOMETRY,
     ];
 
     /**
