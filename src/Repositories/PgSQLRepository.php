@@ -104,29 +104,4 @@ class PgSQLRepository extends Repository
 
         return $list;
     }
-
-    /**
-     * Get the stored column definition by table and column name.
-     *
-     * @param  string  $table  Table name.
-     * @param  string  $column  Column name.
-     * @return string|null  The stored column definition. NULL if not found.
-     */
-    public function getStoredDefinition(string $table, string $column): ?string
-    {
-        $definition = DB::selectOne(
-            "SELECT generation_expression
-                FROM information_schema.columns
-                WHERE table_name = '$table'
-                    AND column_name = '$column'
-                    AND is_generated = 'ALWAYS'",
-        );
-
-        if ($definition === null) {
-            return null;
-        }
-
-        $definitionArr = array_change_key_case((array) $definition);
-        return $definitionArr['generation_expression'] !== '' ? $definitionArr['generation_expression'] : null;
-    }
 }
