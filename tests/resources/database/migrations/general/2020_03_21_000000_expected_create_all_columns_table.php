@@ -80,7 +80,7 @@ return new class extends TestMigration
 
             if (
                 !in_array(DB::getDriverName(), [Driver::MARIADB->value, Driver::MYSQL->value]) ||
-                version_compare(DB::getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION), '5.7', 'eq')
+                version_compare(DB::getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION), '5.8', '>')
             ) {
                 $table->geography('geography');
                 $table->geography('geographyGeometryCollection', 'geometryCollection');
