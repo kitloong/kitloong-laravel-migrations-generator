@@ -189,13 +189,6 @@ class MigrationsGeneratorServiceProvider extends ServiceProvider
             [
                 ColumnType::GEOGRAPHY,
                 ColumnType::GEOMETRY,
-                ColumnType::GEOMETRY_COLLECTION,
-                ColumnType::LINE_STRING,
-                ColumnType::MULTI_LINE_STRING,
-                ColumnType::POINT,
-                ColumnType::MULTI_POINT,
-                ColumnType::MULTI_POLYGON,
-                ColumnType::POLYGON,
             ] as $columnType
         ) {
             $this->columnTypeSingleton($columnType, SpatialColumn::class);
